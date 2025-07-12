@@ -2,6 +2,7 @@ const express=require("express");
 const router=express.Router();
 const { Accounts,Users } = require("../db");
 const {authMiddleware}=require("../middleware/auth");
+const mongoose = require("mongoose");
 
 router.get("/balance",authMiddleware,async (req,res)=>{
 
@@ -15,64 +16,85 @@ router.get("/balance",authMiddleware,async (req,res)=>{
 })
 
 router.post("/transfer",authMiddleware,async (req,res)=>{
+    const session = await mongoose.startSession();
+    try{
+    session.startTransaction();
+    const amount=Number(req.body.amount)
+    const toUsername=req.body.toUsername;
     const sender=await Accounts.findOne({
         user:req.userId
-    })
+    }).session(session)
 
     if(!sender){
+        await session.abortTransaction();
         res.status(401).json({
             message:"sender not found"
         })
         return
     }
-    if(sender.balance<req.body.amount){
+    if(sender.balance<amount||amount<=0||isNaN(amount)){
+        await session.abortTransaction();
         res.status(400).json({
             message:"insufficient balance"
         })
         return
     }
     else{
-        const newbalance=sender.balance-req.body.amount
         await Accounts.updateOne({
             user:req.userId
         },{
-            balance:newbalance
-        })
+           $inc:{balance:-amount}
+        },
+        {session})
     }
 
     const reciever=await Users.findOne({
-        username:req.body.toUsername
-    })
+        username:toUsername
+    }).session(session)
+
+    if(!reciever){
+        await session.abortTransaction();
+        res.status(401).json({
+            message:"reciever not found"
+        })
+        return
+    }
 
     const recieverId=reciever._id
     const recvaccount=await Accounts.findOne({
         user:recieverId
-    })
+    }).session(session)
 
     if(!recvaccount){
+        await session.abortTransaction();
         res.status(400).json({
             message:"receiver account not found"
         })
         return
     }
 
-    try{
-    const newbalance=Number(recvaccount.balance)+Number(req.body.amount)
     await Accounts.updateOne({
         user:recieverId
     },{
-        balance:newbalance
-    })
-    }
-    catch(err){
-        console.log(err)
-    }
+       $inc:{balance:amount}
+    },{session})
 
+    await session.commitTransaction()
     res.status(200).json({
         message:"transaction successful"
     })
 
     return
+    }
+    catch(err){
+        await session.abortTransaction();
+        console.log(err)
+        return
+    }finally {
+        session.endSession();
+        return
+    }
+
 })
 
 module.exports=router;
