@@ -12,8 +12,8 @@ export default function Landing(){
       }}
     />
   <div className="flex absolute text-white pt-8 ">
-    <div className="ml-50 text-2xl font-medium font-serif cursor-pointer tracking-tighter z-1">SwiftPay</div>
-    <div className="flex ml-180 text-2xl z-1">
+    <div className="ml-30 text-2xl font-medium font-serif cursor-pointer tracking-tighter z-1">SwiftPay</div>
+    <div className="flex ml-243 text-2xl z-1">
         <a href="https://x.com/Avichal_08" target="_blank" rel="noopener noreferrer" className="cursor-pointer"><FiTwitter /></a>
         <a href="https://github.com/avichal-08/paytm-hl-" target="_blank" rel="noopener noreferrer" className="ml-10"><FiGithub /></a>  
     </div>
