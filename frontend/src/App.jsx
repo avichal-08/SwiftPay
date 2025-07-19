@@ -5,6 +5,7 @@ const Signup = React.lazy(()=>import("./components/signup"));
 const Login = React.lazy(()=>import("./components/login"));
 const Dashboard = React.lazy(()=>import("./components/dashboard"));
 const Send = React.lazy(()=>import("./components/transfer"));
+const How = React.lazy(()=>import("./components/how"));
 function App() {
   return (
     <BrowserRouter>
@@ -14,6 +15,7 @@ function App() {
       <Route path="/login" element={<Login/>}/>
       <Route path="/dashboard" element={<Dashboard/>}/>
       <Route path="/send" element={<Send/>}/>
+      <Route path="/howitworks" element={<How/>}/>
     </Routes>
     </BrowserRouter>
   )
