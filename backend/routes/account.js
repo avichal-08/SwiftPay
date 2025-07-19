@@ -27,14 +27,14 @@ router.post("/transfer",authMiddleware,async (req,res)=>{
 
     if(!sender){
         await session.abortTransaction();
-        res.status(401).json({
+        res.status(200).json({
             message:"sender not found"
         })
         return
     }
     if(sender.balance<amount||amount<=0||isNaN(amount)){
         await session.abortTransaction();
-        res.status(400).json({
+        res.status(200).json({
             message:"insufficient balance"
         })
         return
@@ -54,7 +54,7 @@ router.post("/transfer",authMiddleware,async (req,res)=>{
 
     if(!reciever){
         await session.abortTransaction();
-        res.status(401).json({
+        res.status(200).json({
             message:"reciever not found"
         })
         return
@@ -67,7 +67,7 @@ router.post("/transfer",authMiddleware,async (req,res)=>{
 
     if(!recvaccount){
         await session.abortTransaction();
-        res.status(400).json({
+        res.status(200).json({
             message:"receiver account not found"
         })
         return

@@ -20,21 +20,39 @@ router.put("/",authMiddleware, async (req,res)=>{
     })
 })
 
+router.get("/info",authMiddleware,async (req,res)=>{
+    const user=await Users.findOne({
+        _id:req.userId
+    })
+    if(!user){
+        res.status(411).json({
+            message:"user not found"
+        })
+    }
+    res.status(200).json({
+        name:user.fname,
+        username:user.username
+    })
+    return;
+})
+
 router.post("/signup",async (req,res)=>{
     const success=signupBody.safeParse(req.body)
     if(!success){
-        res.status(411).json({
+        res.json({
             message:"wrong input"
         })
+        return
     }
     const existingUser=await Users.findOne({
         username:req.body.username
     })
 
     if(existingUser){
-        res.status(411).json({
+        res.json({
             message:"username already taken"
         })
+        return
     }
 
     const user=await Users.create({
@@ -57,17 +75,19 @@ router.post("/signup",async (req,res)=>{
     }, JWT_SECRET);
 
     res.json({
-        message: "User created successfully",
+        isSignup: true,
         token: token
     })
+    return
 })
 
 router.post("/login",async (req,res)=>{
     const success=loginBody.safeParse(req.body)
     if(!success){
-        res.status(411).json({
-            message:"wrong inputs"
+        res.json({
+            message:"error while logging in"
         })
+        return
     }
 
     const user=await Users.findOne({
@@ -76,17 +96,19 @@ router.post("/login",async (req,res)=>{
     })
 
     if(!user){
-        res.status(411).json({
-            message:"error while logging in"
+        res.json({
+            message:"wrong inputs"
         })
+        return
     }
 
     const token=jwt.sign({
         userId:user._id
     },JWT_SECRET)
 
-    res.json({
-        token:token
+    res.status(200).json({
+        token:token,
+        isLogin:true
     })
     return;
 })

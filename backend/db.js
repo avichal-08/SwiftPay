@@ -10,7 +10,7 @@ const userSchema=mongoose.Schema({
     username:{ type:String, unique:true , required:true,trim:true,minLength:4,maxLength:10},
     password:{type:String,required:true,minLength:6}
     }, { timestamps: true });
-
+    
 const accountSchema=mongoose.Schema({
     user:{
         type:mongoose.Schema.Types.ObjectId,
