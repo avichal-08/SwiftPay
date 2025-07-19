@@ -30,7 +30,8 @@ router.get("/info",authMiddleware,async (req,res)=>{
         })
     }
     res.status(200).json({
-        name:user.fname,
+        fname:user.fname,
+        lname:user.lname,
         username:user.username
     })
     return;
