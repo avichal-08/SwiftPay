@@ -6,6 +6,7 @@ const {authMiddleware}=require("../middleware/auth")
 router.get("/",authMiddleware,async (req,res)=>{
     const users=await Users.find()
     res.json(users)
+    return;
 })
 
 module.exports=router

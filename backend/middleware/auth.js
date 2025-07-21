@@ -2,7 +2,6 @@ const {JWT_SECRET}=require("../config");
 const jwt=require("jsonwebtoken");
 
 const authMiddleware=(req,res,next)=>{
-    try{
     const authHeader=req.headers.authorization;
     if(!authHeader||!authHeader.startsWith('Bearer ')){
         res.status(200).json({
@@ -21,9 +20,6 @@ const authMiddleware=(req,res,next)=>{
         res.status(403).json({
             message:"unauthorized"
         });
-    }}
-    catch(err){
-        console.log(err)
     }
 }
 

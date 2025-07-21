@@ -5,7 +5,6 @@ const {authMiddleware}=require("../middleware/auth");
 const mongoose = require("mongoose");
 
 router.get("/balance",authMiddleware,async (req,res)=>{
-
     const account=await Accounts.findOne({
         user:req.userId
     })
@@ -85,10 +84,12 @@ router.post("/transfer",authMiddleware,async (req,res)=>{
     })
 
     return
-    }
-    catch(err){
+    }catch(err){
         await session.abortTransaction();
-        console.log(err)
+        res.status(400).json({
+            message:"error while performing transaction",
+            error:err
+        })
         return
     }finally {
         session.endSession();

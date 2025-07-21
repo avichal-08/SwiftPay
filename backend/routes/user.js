@@ -3,6 +3,7 @@ const router=express.Router();
 const { Users,Accounts } = require("../db");
 const {signupBody,loginBody,updateBody}=require("../types")
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt")
 const { JWT_SECRET } = require("../config");
 const {authMiddleware}=require("../middleware/auth")
 
@@ -18,6 +19,7 @@ router.put("/",authMiddleware, async (req,res)=>{
     res.status(200).json({
         message:"updated successfully"
     })
+    return;
 })
 
 router.get("/info",authMiddleware,async (req,res)=>{
@@ -55,12 +57,12 @@ router.post("/signup",async (req,res)=>{
         })
         return
     }
-
+    const password=await bcrypt.hash(req.body.password,10)
     const user=await Users.create({
         fname:req.body.fname,
         lname:req.body.lname,
         username:req.body.username,
-        password:req.body.password
+        password
     })
 
     const userId = user._id;
@@ -79,7 +81,7 @@ router.post("/signup",async (req,res)=>{
         isSignup: true,
         token: token
     })
-    return
+    return;
 })
 
 router.post("/login",async (req,res)=>{
@@ -93,10 +95,10 @@ router.post("/login",async (req,res)=>{
 
     const user=await Users.findOne({
         username:req.body.username,
-        password:req.body.password
     })
-
-    if(!user){
+    const isPass=await bcrypt.compare(req.body.password,user.password)
+    
+    if(!(user&&isPass)){
         res.json({
             message:"wrong inputs"
         })

@@ -17,3 +17,4 @@ I build a PayTM like application that let’s users send money to each other giv
 
 1. MERN Stack
 2. JWT for authorization 
+3. Bcrypt for password hashing
