@@ -1,3 +1,4 @@
+require('dotenv').config();
 import { useSearchParams,useNavigate } from "react-router-dom"
 import axios from "axios"
 import {useRef} from "react"
@@ -36,7 +37,7 @@ export default function Send(){
         <button className="bg-orange-700 hover:bg-orange-600 w-90 mx-4 h-10 rounded mt-8 text-xl" onClick={async()=>{
           try{
             const amount=amountRef.current.value
-          const response=await axios.post("http://localhost:3000/api/v1/account/transfer",{
+          const response=await axios.post(`${process.env.VITE_API_URL}/api/v1/account/transfer`,{
             amount,
             toUsername:username
           },{

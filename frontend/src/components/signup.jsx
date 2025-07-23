@@ -1,3 +1,4 @@
+require('dotenv').config();
 import { useNavigate } from "react-router-dom"
 import { GrHome } from "react-icons/gr";
 import {useRef,useEffect} from "react";
@@ -11,7 +12,7 @@ export default function Signup(){
     const token=localStorage.getItem("token")
         useEffect(()=>{
           const isLog=async ()=>{
-            const response=await axios.get("http://localhost:3000/api/v1/me/",{
+            const response=await axios.get(`${process.env.VITE_API_URL}/api/v1/me/`,{
               headers:{
                 Authorization:`Bearer ${token}`
               }
@@ -50,7 +51,7 @@ export default function Signup(){
           const lname=lnameRef.current.value;
           const username=unameRef.current.value;
           const password=passwordRef.current.value;
-          const response=await axios.post("http://localhost:3000/api/v1/user/signup",{
+          const response=await axios.post(`${process.env.VITE_API_URL}/api/v1/user/signup`,{
             fname,
             lname,
             username,
