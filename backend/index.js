@@ -2,10 +2,7 @@ const express =require("express");
 const cors=require("cors");
 const mainrouter=require("./routes/index");
 const app=express();
-app.use(cors({
-  origin: 'https://swift-pay-green.vercel.app/',
-  credentials: true
-}));
+app.use(cors());
 app.use(express.json());
 
 app.use("/api/v1",mainrouter);
