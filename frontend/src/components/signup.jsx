@@ -1,4 +1,3 @@
-require('dotenv').config();
 import { useNavigate } from "react-router-dom"
 import { GrHome } from "react-icons/gr";
 import {useRef,useEffect} from "react";
@@ -12,7 +11,7 @@ export default function Signup(){
     const token=localStorage.getItem("token")
         useEffect(()=>{
           const isLog=async ()=>{
-            const response=await axios.get(`${process.env.VITE_API_URL}/api/v1/me/`,{
+            const response=await axios.get(`https://swiftpay-bx0b.onrender.com/api/v1/me/`,{
               headers:{
                 Authorization:`Bearer ${token}`
               }

@@ -1,4 +1,3 @@
-require('dotenv').config();
 import {useNavigate} from "react-router-dom"
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -16,7 +15,7 @@ export default function Dashboard(){
        }
        else{
        const namefn= async ()=>{
-        const userres=await axios.get(`${process.env.VITE_API_URL}/api/v1/user/info`,{
+        const userres=await axios.get(`https://swiftpay-bx0b.onrender.com/api/v1/user/info`,{
             headers:{
                 Authorization:`Bearer ${token}`
             }
@@ -27,7 +26,7 @@ export default function Dashboard(){
     };
         namefn()
         const balancefn=async()=>{
-        const balanceres=await axios.get(`${process.env.VITE_API_URL}/api/v1/account/balance`,{
+        const balanceres=await axios.get(`https://swiftpay-bx0b.onrender.com/api/v1/account/balance`,{
             headers:{
                 Authorization:`Bearer ${token}`
             }
@@ -36,7 +35,7 @@ export default function Dashboard(){
     };
     balancefn()
     const usersfn=async()=>{
-        const usersres=await axios.get(`${process.env.VITE_API_URL}/api/v1/bulk/`,{
+        const usersres=await axios.get(`https://swiftpay-bx0b.onrender.com/api/v1/bulk/`,{
             headers:{
                 Authorization:`Bearer ${token}`
             }
