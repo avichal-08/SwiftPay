@@ -50,7 +50,7 @@ export default function Signup(){
           const lname=lnameRef.current.value;
           const username=unameRef.current.value;
           const password=passwordRef.current.value;
-          const response=await axios.post("$https://swiftpay-bx0b.onrender.com/api/v1/user/signup",{
+          const response=await axios.post("https://swiftpay-bx0b.onrender.com/api/v1/user/signup",{
             fname,
             lname,
             username,
