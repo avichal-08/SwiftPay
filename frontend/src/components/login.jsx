@@ -7,10 +7,11 @@ export default function Login(){
     const navigate=useNavigate()
     const usernameRef=useRef()
     const passwordRef=useRef()
+    const apiUrl = import.meta.env.VITE_API_URL
     const token=localStorage.getItem("token")
     useEffect(()=>{
       const isLog=async ()=>{
-        const response=await axios.get(`https://swiftpay-bx0b.onrender.com/api/v1/me/`,{
+        const response=await axios.get(`${apiUrl}api/v1/me/`,{
           headers:{
             Authorization:`Bearer ${token}`
           }
@@ -45,7 +46,7 @@ export default function Login(){
         <button className="mx-4 mt-3 bg-orange-700 hover:bg-orange-600 text-white rounded h-12 w-72 font-medium cursor-pointer" onClick={async ()=>{
           const username=usernameRef.current.value
           const password=passwordRef.current.value
-          const response=await axios.post(`${process.env.VITE_API_URL}/api/v1/user/login`,{
+          const response=await axios.post(`${apiUrl}/api/v1/user/login`,{
             username,
             password
           });

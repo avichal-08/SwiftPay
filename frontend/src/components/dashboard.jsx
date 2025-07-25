@@ -7,6 +7,7 @@ export default function Dashboard(){
     const [uname,setUname]=useState("")
     const [balance,setBalance]=useState(0)
     const [users,setUsers]=useState([])
+    const apiUrl = import.meta.env.VITE_API_URL
     const token=localStorage.getItem("token")
     const navigate=useNavigate()
     useEffect(()=>{
@@ -15,7 +16,7 @@ export default function Dashboard(){
        }
        else{
        const namefn= async ()=>{
-        const userres=await axios.get(`https://swiftpay-bx0b.onrender.com/api/v1/user/info`,{
+        const userres=await axios.get(`${apiUrl}/api/v1/user/info`,{
             headers:{
                 Authorization:`Bearer ${token}`
             }
@@ -26,7 +27,7 @@ export default function Dashboard(){
     };
         namefn()
         const balancefn=async()=>{
-        const balanceres=await axios.get(`https://swiftpay-bx0b.onrender.com/api/v1/account/balance`,{
+        const balanceres=await axios.get(`${apiUrl}/api/v1/account/balance`,{
             headers:{
                 Authorization:`Bearer ${token}`
             }
@@ -35,7 +36,7 @@ export default function Dashboard(){
     };
     balancefn()
     const usersfn=async()=>{
-        const usersres=await axios.get(`https://swiftpay-bx0b.onrender.com/api/v1/bulk/`,{
+        const usersres=await axios.get(`${apiUrl}/api/v1/bulk/`,{
             headers:{
                 Authorization:`Bearer ${token}`
             }

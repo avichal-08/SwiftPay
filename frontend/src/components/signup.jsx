@@ -4,14 +4,15 @@ import {useRef,useEffect} from "react";
 import axios from "axios";
 export default function Signup(){
     const navigate=useNavigate()
-    const fnameRef=useRef();
-    const lnameRef=useRef();
-    const unameRef=useRef();
-    const passwordRef=useRef();
+    const fnameRef=useRef()
+    const lnameRef=useRef()
+    const unameRef=useRef()
+    const passwordRef=useRef()
+    const apiUrl = import.meta.env.VITE_API_URL
     const token=localStorage.getItem("token")
         useEffect(()=>{
           const isLog=async ()=>{
-            const response=await axios.get("https://swiftpay-bx0b.onrender.com/api/v1/me/",{
+            const response=await axios.get(`${apiUrl}/api/v1/me/`,{
               headers:{
                 Authorization:`Bearer ${token}`
               }
@@ -50,7 +51,7 @@ export default function Signup(){
           const lname=lnameRef.current.value;
           const username=unameRef.current.value;
           const password=passwordRef.current.value;
-          const response=await axios.post("https://swiftpay-bx0b.onrender.com/api/v1/user/signup",{
+          const response=await axios.post(`${apiUrl}/api/v1/user/signup`,{
             fname,
             lname,
             username,

@@ -8,6 +8,7 @@ export default function Send(){
     const username=searchParam.get("username")
     const amountRef=useRef()
     const navigate=useNavigate()
+    const apiUrl = import.meta.env.VITE_API_URL
     const token=localStorage.getItem("token")
     useEffect(()=>{
       if(!token)
@@ -36,7 +37,7 @@ export default function Send(){
         <button className="bg-orange-700 hover:bg-orange-600 w-90 mx-4 h-10 rounded mt-8 text-xl" onClick={async()=>{
           try{
             const amount=amountRef.current.value
-          const response=await axios.post(`https://swiftpay-bx0b.onrender.com/api/v1/account/transfer`,{
+          const response=await axios.post(`${apiUrl}/api/v1/account/transfer`,{
             amount,
             toUsername:username
           },{
