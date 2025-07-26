@@ -57,13 +57,31 @@ router.post("/signup",async (req,res)=>{
         })
         return
     }
+
+    const pass=req.body.password
+    console.log(pass)
+    console.log(pass.length)
+
+    if(pass.length<6){
+        res.json({
+            message:"Password must be at least 6 characters long"
+        })
+        return
+    }
+
     const password=await bcrypt.hash(req.body.password,10)
+    try{
     const user=await Users.create({
         fname:req.body.fname,
         lname:req.body.lname,
         username:req.body.username,
         password
-    })
+    })}catch(error){
+        res.json({
+            message:error
+        })
+        return
+    }
 
     const userId = user._id;
 
