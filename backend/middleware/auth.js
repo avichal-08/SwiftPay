@@ -10,15 +10,17 @@ const authMiddleware=(req,res,next)=>{
     }
 
     const token=authHeader.split(' ')[1]
-
+console.log(token)
         const decoded=jwt.verify(token,JWT_SECRET);
+        console.log(token)
         if(decoded){
         req.userId=decoded.userId;
-        next();}
+        next();
+        }
         else{
         res.status(200).json({
         allowed:false
-    });
+        });
         }
 }
 
