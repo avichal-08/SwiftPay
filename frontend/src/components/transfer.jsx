@@ -47,6 +47,7 @@ export default function Send(){
           })
           if(response.data.message==="transaction successful"){
             alert("transaction successful")
+            navigate("/dashboard")
           }
           else{
             alert(response.data.message)

@@ -3,6 +3,12 @@ import { FiGithub } from "react-icons/fi";
 import {useNavigate} from "react-router-dom"
 export default function Landing(){
   const navigate=useNavigate()
+
+   useEffect(async()=>{
+        const response=await axios.get(`${apiUrl}/api/v1/ping/`,{
+    })
+  })//to ping server for its activation at the earliest
+
     return(
         <div className="min-h-screen w-full relative bg-black">
     <div
