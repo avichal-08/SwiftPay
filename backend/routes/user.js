@@ -58,11 +58,7 @@ router.post("/signup",async (req,res)=>{
         return
     }
 
-    const pass=req.body.password
-    console.log(pass)
-    console.log(pass.length)
-
-    if(pass.length<6){
+    if((req.body.password).length<6){
         res.json({
             message:"Password must be at least 6 characters long"
         })
@@ -85,10 +81,16 @@ router.post("/signup",async (req,res)=>{
 
     const userId = user._id;
 
+    try{
     await Accounts.create({
         user:userId,
         balance:10000
-    })
+    })}catch(error){
+        res.json({
+            message:error
+        })
+        return
+    }
 
 
     const token = jwt.sign({
@@ -114,11 +116,19 @@ router.post("/login",async (req,res)=>{
     const user=await Users.findOne({
         username:req.body.username,
     })
+
+    if(!(user)){
+        res.json({
+            message:"username does not exist"
+        })
+        return
+    }
+
     const isPass=await bcrypt.compare(req.body.password,user.password)
     
-    if(!(user&&isPass)){
+    if(!(isPass)){
         res.json({
-            message:"wrong inputs"
+            message:"wrong password"
         })
         return
     }
