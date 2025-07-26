@@ -2,13 +2,16 @@ import { FiTwitter } from "react-icons/fi"
 import { FiGithub } from "react-icons/fi"
 import {useNavigate} from "react-router-dom"
 import { useEffect } from "react"
+import axios from "axios"
 export default function Landing(){
   const navigate=useNavigate()
-
-   useEffect(async()=>{
+  const apiUrl = import.meta.env.VITE_API_URL
+   useEffect(()=>{
+       const ping=async()=>{
         const response=await axios.get(`${apiUrl}/api/v1/ping/`,{
     })
-  })//to ping server for its activation at the earliest
+    ping()
+  }})//to ping server for its activation at the earliest
 
     return(
         <div className="min-h-screen w-full relative bg-black">
