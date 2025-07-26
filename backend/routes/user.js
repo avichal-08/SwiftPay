@@ -58,6 +58,13 @@ router.post("/signup",async (req,res)=>{
         return
     }
 
+    if((req.body.username).length<4){
+         res.json({
+            message:"Username must be at least 4 characters long"
+        })
+        return
+    }
+
     if((req.body.password).length<6){
         res.json({
             message:"Password must be at least 6 characters long"

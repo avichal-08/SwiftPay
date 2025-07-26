@@ -24,7 +24,7 @@ export default function Signup(){
           isLog()
         })
     return(
-     <div className="min-h-screen w-full bg-black relative">
+     <div className="min-h-screen w-[100vw] bg-black relative">
   <div
     className="absolute inset-0 z-0"
     style={{
@@ -39,9 +39,9 @@ export default function Signup(){
     }}
   />
   <div onClick={()=>navigate("/")} className="absolute text-white text-2xl m-3 cursor-pointer "><GrHome /></div>
-  <div className="bg-white h-130 w-80 absolute mt-15 ml-135 rounded-xl">
-        <div className="text-3xl font-bold font-sans ml-24 mt-2">Sign Up</div>
-        <div className="text-lg text-gray-500 mt-2 mx-5">Enter your information to create an <p className="ml-24">account</p></div>
+  <div className="bg-white h-[80vh] w-[24vw] absolute mt-[10vh] ml-[40vw] rounded-xl">
+        <div className="text-3xl font-bold font-sans ml-[8vw] mt-[1vh]">Sign Up</div>
+        <div className="text-lg text-gray-500 mt-[1vh] ml-[1.5vw]">Enter your information to create an <p className="ml-[8vw]">account</p></div>
         <div className="mx-4"><p className="font-medium">First Name</p><input ref={fnameRef} type="text" className="border border-gray-300 rounded h-9 w-full mt-2 text-gray-600" /></div>
         <div className="mx-4 mt-3"><p className="font-medium">Last Name</p><input ref={lnameRef} type="text" className="border border-gray-300 rounded h-9 w-full mt-2 text-gray-600" /></div>
         <div className="mx-4 mt-3"><p className="font-medium">Username</p><input ref={unameRef} type="text" className="border border-gray-300 rounded h-9 w-full mt-2 text-gray-600" /></div>

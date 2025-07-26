@@ -11,7 +11,7 @@ export default function Login(){
     const token=localStorage.getItem("token")
     useEffect(()=>{
       const isLog=async ()=>{
-        const response=await axios.get(`${apiUrl}api/v1/me/`,{
+        const response=await axios.get(`${apiUrl}/api/v1/me/`,{
           headers:{
             Authorization:`Bearer ${token}`
           }
