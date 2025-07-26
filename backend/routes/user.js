@@ -73,32 +73,18 @@ router.post("/signup",async (req,res)=>{
     }
 
     const password=await bcrypt.hash(req.body.password,10)
-    try{
     const user=await Users.create({
         fname:req.body.fname,
         lname:req.body.lname,
         username:req.body.username,
         password
-    })}catch(error){
-        res.json({
-            message:error
-        })
-        return
-    }
-
+    })
     const userId = user._id;
 
-    try{
     await Accounts.create({
         user:userId,
         balance:10000
-    })}catch(error){
-        res.json({
-            message:error
-        })
-        return
-    }
-
+    })
 
     const token = jwt.sign({
         userId
