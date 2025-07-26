@@ -1,6 +1,6 @@
 import {useNavigate} from "react-router-dom"
-import axios from "axios";
-import { useEffect, useState } from "react";
+import axios from "axios"
+import { useEffect, useState } from "react"
 export default function Dashboard(){
     const [fname,setFname]=useState("")
     const [lname,setLname]=useState("")

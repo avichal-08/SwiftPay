@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
-import { GrHome } from "react-icons/gr";
-import {useRef,useEffect, useState} from "react";
-import axios from "axios";
+import { GrHome } from "react-icons/gr"
+import {useRef,useEffect, useState} from "react"
+import axios from "axios"
 export default function Signup(){
     const navigate=useNavigate()
     const fnameRef=useRef()

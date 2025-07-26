@@ -1,7 +1,7 @@
 import { useSearchParams,useNavigate } from "react-router-dom"
 import axios from "axios"
 import {useRef} from "react"
-import { useEffect } from "react";
+import { useEffect } from "react"
 export default function Send(){
   const [searchParam]=useSearchParams();
     const reciever=searchParam.get("to")
