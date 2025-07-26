@@ -34,7 +34,7 @@ export default function Send(){
         <div className="text-black text-2xl font-sans mt-4 ml-4">Username: {username}</div>
         <div className="text-black text-xl font-sans mt-5 ml-4">Amount (in Rs):</div>
         <input ref={amountRef} type="Number" placeholder="Enter Amount" className="bg-white w-90 mx-4 mt-5 h-10 text-gray-600 text-xl pl-3 pb-1 rounded border border-black"/>
-        <button className="bg-orange-700 hover:bg-orange-600 w-90 mx-4 h-10 rounded mt-8 text-xl" onClick={async()=>{
+        <button className="bg-orange-700 hover:bg-orange-600 cursor-pointer w-90 mx-4 h-10 rounded mt-8 text-xl" onClick={async()=>{
           try{
             const amount=amountRef.current.value
           const response=await axios.post(`${apiUrl}/api/v1/account/transfer`,{

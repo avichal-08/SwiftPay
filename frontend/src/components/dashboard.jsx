@@ -32,7 +32,7 @@ export default function Dashboard(){
                 Authorization:`Bearer ${token}`
             }
         });
-        setBalance(balanceres.data.balance)
+        setBalance(`Your Balance:${balanceres.data.balance}`)
     };
     balancefn()
     const usersfn=async()=>{
@@ -61,7 +61,7 @@ export default function Dashboard(){
         <div className="rounded-full ml-5  w-10 h-10 bg-gray-500 text-black text-xl flex justify-center pt-1">{fname[0]}</div>
         <div className="ml-5 mt-1 font-semibold text-xl">{fname} {lname} </div>
         </div>
-        <div className="ml-[77px] font-semibold text-xl mt-3 ">Your Balance: ₹{balance}</div>
+        <div className="ml-[77px] font-semibold text-xl mt-3 ">{balance}</div>
         </div>
         <div className="text-[#EA6302] text-4xl border-b-2 border-b-black mt-5 h-14">Users</div>
     <div className="bg-[#ff700a4f] mt-6 pt-5 px-5 rounded-2xl border  border-gray-200 text-white text-2xl">
