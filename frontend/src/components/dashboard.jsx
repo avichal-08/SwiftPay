@@ -5,7 +5,7 @@ export default function Dashboard(){
     const [fname,setFname]=useState("")
     const [lname,setLname]=useState("")
     const [uname,setUname]=useState("")
-    const [balance,setBalance]=useState(0)
+    const [balance,setBalance]=useState("")
     const [users,setUsers]=useState([])
     const apiUrl = import.meta.env.VITE_API_URL
     const token=localStorage.getItem("token")
