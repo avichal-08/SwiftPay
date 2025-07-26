@@ -7,7 +7,7 @@ mongoose.connect(process.env.MONGODB_URI)
 const userSchema=mongoose.Schema({
     fname:{type:String,required:true,trim:true},
     lname:{type:String,required:true,trim:true},
-    username:{ type:String, unique:true , required:true,trim:true,minLength:4,maxLength:10},
+    username:{ type:String, unique:true , required:true,trim:true,minLength:4},
     password:{type:String,required:true,minLength:6}
     }, { timestamps: true });
     
