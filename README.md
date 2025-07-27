@@ -11,7 +11,7 @@ I build a PayTM like application that let’s users send money to each other giv
 
 3.  User to update their information (First Name, Last Name, password)
 4. Transfer money(dummy) from their account to other user's account 
-5. Check their won balance
+5. Check their own balance
 
 ### Technology  Used
 
