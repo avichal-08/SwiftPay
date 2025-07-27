@@ -1,19 +1,30 @@
 import { useSearchParams,useNavigate } from "react-router-dom"
 import axios from "axios"
 import {useRef} from "react"
-import { useEffect } from "react"
+import { useEffect ,useState} from "react"
+import Loader from "../components/loader"
 export default function Send(){
   const [searchParam]=useSearchParams();
     const reciever=searchParam.get("to")
     const username=searchParam.get("username")
     const amountRef=useRef()
     const navigate=useNavigate()
+     const [loading,setLoading]=useState(false)
     const apiUrl = import.meta.env.VITE_API_URL
     const token=localStorage.getItem("token")
     useEffect(()=>{
       if(!token)
         navigate("/login")
     },[])
+
+    if(loading){
+      return(
+        <div>
+          <Loader/>
+        </div>
+      )
+    }
+    else{
     return(
       <div className="min-h-screen w-full bg-[#0f0f0f] relative text-white">
         <div className="text-4xl ml-2 cursor-pointer hover:text-orange-600" onClick={()=>navigate("/dashboard")}>←</div>
@@ -35,6 +46,7 @@ export default function Send(){
         <div className="text-black text-xl font-sans mt-5 ml-4">Amount (in Rs):</div>
         <input ref={amountRef} type="Number" placeholder="Enter Amount" className="bg-white w-90 mx-4 mt-5 h-10 text-gray-600 text-xl pl-3 pb-1 rounded border border-black"/>
         <button className="bg-orange-700 hover:bg-orange-600 cursor-pointer w-90 mx-4 h-10 rounded mt-8 text-xl" onClick={async()=>{
+          setLoading(true)
           try{
             const amount=amountRef.current.value
           const response=await axios.post(`${apiUrl}/api/v1/account/transfer`,{
@@ -59,5 +71,5 @@ export default function Send(){
       }}>Initiate Transfer</button>
     </div>
   </div>
-    )
+    )}
 }

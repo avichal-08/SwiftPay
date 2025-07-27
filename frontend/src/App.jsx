@@ -1,11 +1,11 @@
 import { BrowserRouter,Route,Routes } from "react-router-dom"
 import React,{ lazy} from 'react';
-const Landing = React.lazy(()=>import("./components/landing"));
-const Signup = React.lazy(()=>import("./components/signup"));
-const Login = React.lazy(()=>import("./components/login"));
-const Dashboard = React.lazy(()=>import("./components/dashboard"));
-const Send = React.lazy(()=>import("./components/transfer"));
-const How = React.lazy(()=>import("./components/how"));
+const Landing = React.lazy(()=>import("./pages/landing"));
+const Signup = React.lazy(()=>import("./pages/signup"));
+const Login = React.lazy(()=>import("./pages/login"));
+const Dashboard = React.lazy(()=>import("./pages/dashboard"));
+const Send = React.lazy(()=>import("./pages/transfer"));
+const How = React.lazy(()=>import("./pages/how"));
 function App() {
   return (
     <BrowserRouter>

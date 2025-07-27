@@ -1,12 +1,14 @@
 import {useNavigate} from "react-router-dom"
 import axios from "axios"
 import { useEffect, useState } from "react"
+import Loader from "../components/loader"
 export default function Dashboard(){
     const [fname,setFname]=useState("")
     const [lname,setLname]=useState("")
     const [uname,setUname]=useState("")
     const [balance,setBalance]=useState("")
     const [users,setUsers]=useState([])
+    const [loading,setLoading]=useState(true)
     const apiUrl = import.meta.env.VITE_API_URL
     const token=localStorage.getItem("token")
     const navigate=useNavigate()
@@ -42,10 +44,16 @@ export default function Dashboard(){
             }
         });
         setUsers(usersres.data)
+        setLoading(false)
     };
     usersfn()
 }},[])
-  
+  if(loading){
+    return(
+      <Loader/>
+    )
+  }
+  else{
     return(<div className="bg-white flex">
         <div className="fixed flex justify-between backdrop-blur-md bg-white/20 w-full ">
             <div className="flex text-4xl m-3"><div className="text-[#EA6302]">Swift</div><div>Pay</div></div>
@@ -76,5 +84,5 @@ export default function Dashboard(){
     </div>
 </div>
 </div>
-    )
+    )}
 }
