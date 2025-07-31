@@ -1,12 +1,11 @@
+require('dotenv').config();
 const express=require("express");
 const router=express.Router();
 const { Users,Accounts } = require("../db");
 const {signupBody,loginBody,updateBody}=require("../types")
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt")
-const { JWT_SECRET } = require("../config");
 const {authMiddleware}=require("../middleware/auth")
-
 router.put("/",authMiddleware, async (req,res)=>{
     const success=updateBody.safeParse(req.body)
     if(!success){
@@ -88,7 +87,7 @@ router.post("/signup",async (req,res)=>{
 
     const token = jwt.sign({
         userId
-    }, JWT_SECRET);
+    },process.env.JWT_SECRET);
 
     res.json({
         isSignup: true,
@@ -128,7 +127,7 @@ router.post("/login",async (req,res)=>{
 
     const token=jwt.sign({
         userId:user._id
-    },JWT_SECRET)
+    },process.env.JWT_SECRET)
 
     res.status(200).json({
         token:token,

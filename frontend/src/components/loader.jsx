@@ -1,17 +1,18 @@
 import { motion } from "motion/react"
-export default function Loader(){
+export default function BouncingLoader(){
     return(
-        <div className="flex gap-2 mt-[20%] ml-[45%]">
+        <div className="flex gap-2 mt-[20%] ml-[45%] absolute">
             <motion.div 
             initial={{
-                y:0
+                y:0,
             }}
             animate={{
-                y:[0,20,0]
+                y:[0,20,0],
             }}
             transition={{
-                duration:0.9,
-                repeat:Infinity
+                duration:1,
+                repeat:Infinity,
+                repeatType:"loop"
             }} 
             className="bg-orange-600 rounded-full h-10 w-10"></motion.div>
             <motion.div
@@ -23,7 +24,9 @@ export default function Loader(){
             }}
             transition={{
                 duration:1,
-                repeat:Infinity
+                delay:0.1,
+                repeat:Infinity,
+                repeatType:"loop"
             }}
             className="bg-orange-600 rounded-full h-10 w-10"></motion.div>
             <motion.div
@@ -34,8 +37,10 @@ export default function Loader(){
                 y:[0,20,0]
             }}
             transition={{
-                duration:1.1,
-                repeat:Infinity
+                duration:1,
+                delay:0.2,
+                repeat:Infinity,
+                repeatType:"loop"
             }} 
             className="bg-orange-600 rounded-full h-10 w-10"></motion.div>
         </div>

@@ -1,4 +1,17 @@
+const mongoose=require("mongoose");
 require('dotenv').config();
-module.exports={
-    JWT_SECRET:process.env.JWT_SECRET
+
+const connectDB=async ()=>{
+    try{
+        mongoose.connect(process.env.MONGODB_URI)
+        console.log("MongoDB connected ")
+    }catch(error){
+        console.error("MongoDB connection error ", err)
+    }
 }
+
+module.exports={
+    connectDB
+}
+
+
