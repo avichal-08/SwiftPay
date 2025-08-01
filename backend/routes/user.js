@@ -66,7 +66,7 @@ router.post("/signup",async (req,res)=>{
 
     if((req.body.password).length<6){
         res.json({
-            message:"Password must more than 6 characters long"
+            message:"Password must be more than 6 characters long"
         })
         return
     }
