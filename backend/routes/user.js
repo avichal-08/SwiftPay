@@ -59,7 +59,7 @@ router.post("/signup",async (req,res)=>{
 
     if((req.body.username).length<4){
          res.json({
-            message:"Username must be at least 4 characters long"
+            message:"Username must be more than 4 characters long"
         })
         return
     }
