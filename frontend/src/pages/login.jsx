@@ -10,20 +10,10 @@ export default function Login(){
     const apiUrl = import.meta.env.VITE_API_URL
     const token=localStorage.getItem("token")
     useEffect(()=>{
-      if(token){
-      const isLog=async ()=>{
-        const response=await axios.get(`${apiUrl}/api/v1/me/`,{
-          headers:{
-            Authorization:`Bearer ${token}`
-          }
-        })
-        if (response.data.allowed){
-          navigate("/dashboard")
-        }
-      }
-      isLog()
-    }
-    })
+       if(token){
+        navigate("/dashboard")
+       }
+    },[])
     return(
         <div className="min-h-screen w-full bg-black relative">
   <div

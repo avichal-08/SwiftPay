@@ -10,21 +10,11 @@ export default function Signup(){
     const passwordRef=useRef()
     const apiUrl = import.meta.env.VITE_API_URL
     const token=localStorage.getItem("token")
-        useEffect(()=>{
-          if(token){
-          const isLog=async ()=>{
-            const response=await axios.get(`${apiUrl}/api/v1/me/`,{
-              headers:{
-                Authorization:`Bearer ${token}`
-              }
-            })
-            if (response.data.allowed){
-              navigate("/dashboard")
-            }
-          }
-          isLog()
-        }
-        })
+       useEffect(()=>{
+       if(token){
+        navigate("/dashboard")
+       }
+    },[])
     return(
      <div className="min-h-screen w-[100vw] bg-black relative">
   <div
