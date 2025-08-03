@@ -57,9 +57,8 @@ export default function Dashboard(){
     return(<div className="bg-white flex">
         <div className="fixed flex justify-between backdrop-blur-md bg-white/20 w-full ">
             <div className="flex text-4xl m-3"><div className="text-[#EA6302]">Swift</div><div>Pay</div></div>
-        <button className="text-xl text-white rounded-xl mt-3 mr-3 w-35 h-10 bg-orange-700 cursor-pointer hover:bg-orange-600" onClick={()=>{
-            localStorage.removeItem("token")
-            navigate("/login")
+        <button className="text-xl  rounded-xl mt-3 mr-3 w-35 h-10 bg-gray-200 cursor-pointer hover:bg-orange-600" onClick={()=>{
+            navigate("/logout")
         }}>Log Out</button>
         </div>
         <div className="h-screen ml-40 w-300 mt-18 mr-40">
