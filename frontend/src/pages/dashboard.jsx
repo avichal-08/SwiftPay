@@ -57,7 +57,7 @@ export default function Dashboard(){
     return(<div className="bg-white flex">
         <div className="fixed flex justify-between backdrop-blur-md bg-white/20 w-full ">
             <div className="flex text-4xl m-3"><div className="text-[#EA6302]">Swift</div><div>Pay</div></div>
-        <button className="text-xl  rounded-xl mt-3 mr-3 w-35 h-10 bg-gray-200 cursor-pointer hover:bg-orange-600" onClick={()=>{
+        <button className="text-xl rounded-xl mt-3 mr-3 w-35 h-10 bg-gray-200 cursor-pointer hover:bg-orange-600 hover:text-white" onClick={()=>{
             navigate("/logout")
         }}>Log Out</button>
         </div>
@@ -65,7 +65,7 @@ export default function Dashboard(){
         <div className="text-[#EA6302] text-4xl border-b-2 border-b-black h-14">Overview</div>
         <div className="bg-[#ff700a4f] rounded-2xl mt-5 h-30 pt-5">
         <div className="flex ">
-        <div className="rounded-full ml-5  w-10 h-10 bg-gray-500 text-black text-xl flex justify-center pt-1">{fname[0]}</div>
+        <div className="rounded-full ml-5  w-10 h-10 bg-gray-500 text-xl flex justify-center pt-1">{fname[0]}</div>
         <div className="ml-5 mt-1 font-semibold text-xl">{fname} {lname} </div>
         </div>
         <div className="ml-[77px] font-semibold text-xl mt-3 ">{balance}</div>
