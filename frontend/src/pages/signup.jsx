@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { GrHome } from "react-icons/gr"
 import {useRef,useEffect, useState} from "react"
+import Loader from "../components/loader"
 import axios from "axios"
 export default function Signup(){
     const navigate=useNavigate()
@@ -8,6 +9,7 @@ export default function Signup(){
     const lnameRef=useRef()
     const unameRef=useRef()
     const passwordRef=useRef()
+    const [loading,setLoading]=useState(false)
     const apiUrl = import.meta.env.VITE_API_URL
     const token=localStorage.getItem("token")
        useEffect(()=>{
@@ -15,7 +17,16 @@ export default function Signup(){
         navigate("/dashboard")
        }
     },[])
-    return(
+
+    if(loading){
+          return(
+            <div>
+              <Loader/>
+            </div>
+          )
+        }
+    else{    
+       return(
      <div className="min-h-screen w-[100vw] bg-black relative">
   <div
     className="absolute inset-0 z-0"
@@ -34,15 +45,25 @@ export default function Signup(){
   <div className="bg-white h-[80vh] w-[24vw] absolute mt-[10vh] ml-[40vw] rounded-xl">
         <div className="text-3xl font-bold font-sans ml-[8vw] mt-[1vh]">Sign Up</div>
         <div className="text-lg text-gray-500 mt-[1vh] ml-[1.5vw]">Enter your information to create an <p className="ml-[8vw]">account</p></div>
-        <div className="mx-4"><p className="font-medium">First Name</p><input ref={fnameRef} type="text" className="border border-gray-300 rounded h-9 w-full mt-2 text-gray-600" /></div>
-        <div className="mx-4 mt-3"><p className="font-medium">Last Name</p><input ref={lnameRef} type="text" className="border border-gray-300 rounded h-9 w-full mt-2 text-gray-600" /></div>
-        <div className="mx-4 mt-3"><p className="font-medium">Username</p><input ref={unameRef} type="text" className="border border-gray-300 rounded h-9 w-full mt-2 text-gray-600" /></div>
-        <div className="mx-4 mt-3"><p className="font-medium">Password</p><input ref={passwordRef} type="text" className="border border-gray-300 rounded h-9 w-full mt-2 text-gray-600" /></div>
-        <button className="mx-4 mt-3 bg-orange-700 hover:bg-orange-600 text-white rounded h-12 w-72 font-medium cursor-pointer" onClick={async ()=>{
+        <div className="mx-4"><p className="font-medium">First Name</p><input ref={fnameRef} type="text" className="border border-gray-300 rounded h-9 w-full mt-2 pl-2 text-gray-600" /></div>
+        <div className="mx-4 mt-3"><p className="font-medium">Last Name</p><input ref={lnameRef} type="text" className="border border-gray-300 rounded h-9 w-full mt-2 pl-2 text-gray-600" /></div>
+        <div className="mx-4 mt-3"><p className="font-medium">Username</p><input ref={unameRef} type="text" className="border border-gray-300 rounded h-9 w-full mt-2 pl-2 text-gray-600" /></div>
+        <div className="mx-4 mt-3"><p className="font-medium">Password</p><input ref={passwordRef} type="text" className="border border-gray-300 rounded h-9 w-full mt-2 pl-2 text-gray-600" /></div>
+        <button className="mx-4 mt-3 bg-orange-700 hover:bg-orange-600 text-white rounded h-12 w-72 font-medium cursor-pointer" onClick={async ()=>{          
           const fname=fnameRef.current.value;
           const lname=lnameRef.current.value;
           const username=unameRef.current.value;
           const password=passwordRef.current.value;
+          if(!(fname))
+            alert("Provide First Name")
+          else if(!(lname))
+            alert("Provide Last Name")
+          else if(!(username.length>4))
+            alert("Username must be more than 4 characters long")
+          else if(!(password.length>6))
+            alert("Password must be more than 6 characters long")
+          else{
+          setLoading(true);
           const response=await axios.post(`${apiUrl}/api/v1/user/signup`,{
             fname,
             lname,
@@ -53,13 +74,15 @@ export default function Signup(){
           localStorage.setItem("token", response.data.token)
           navigate("/dashboard")}
           else{
+            setLoading(false)
             alert(response.data.message)
           }
+        }
         }}>Sign Up</button>
         <div className="font-medium text-sm text-gray-800 mt-2 ml-12">Already have an account ?<span className="ml-2 cursor-pointer underline" onClick={()=>navigate("/login")}>Login</span></div>
      </div>
 </div>
     )
 }
-
+}
 
