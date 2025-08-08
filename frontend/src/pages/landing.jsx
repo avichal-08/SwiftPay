@@ -1,12 +1,10 @@
 import { FiTwitter } from "react-icons/fi"
 import { FiGithub } from "react-icons/fi"
 import {useNavigate} from "react-router-dom"
-import { useEffect } from "react"
-import axios from "axios"
 export default function Landing(){
   const navigate=useNavigate()
   const apiUrl = import.meta.env.VITE_API_URL
-
+  const token=localStorage.getItem("token")
     return(
         <div className="min-h-screen w-full relative bg-black">
     <div
@@ -28,7 +26,11 @@ export default function Landing(){
     <div className="text-white text-xl mt-20 ml-45">Play with dummy currency and feel like real UPI</div>
   <div className="flex  mt-30 ml-70 h-12 font-medium">
     <button onClick={()=>navigate("/howitworks")} className="bg-white rounded w-30 hover:bg-orange-300 cursor-pointer ">How it works</button>
-    <button onClick={()=>navigate("/signup")} className="bg-orange-700 text-white rounded w-25 hover:bg-orange-600 cursor-pointer ml-10 shadow-sm shadow-white hover:shadow-md transition-shadow duration-100">Join Now</button>
+    <button className="bg-orange-700 text-white rounded w-25 hover:bg-orange-600 cursor-pointer ml-10 shadow-sm shadow-white hover:shadow-md transition-shadow duration-100" onClick={()=>{
+      if(token)
+        navigate("/dashboard")
+      else
+        navigate("/signup")}} >Join Now</button>
   </div>
   </div>
   <div className="w-140 h-80 "><img src="https://i.ibb.co/bjTf79GS/Screenshot-1060.png"  alt="loading" className="w-130 h-75 mt-45 ml-20 opacity-80 hover:opacity-100 shadow-md shadow-white hover:shadow-2xl transition-shadow duration-300"/>
